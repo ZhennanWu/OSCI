@@ -1,3 +1,9 @@
+1. Creat `osci/config/files/local.yml` from `osci/config/files/default.yml`
+    1. Change base_path to `./.data`
+    2. Input `github/token`
+2. Use python<=3.8
+3. Modify requirements to 
+```
 azure-core==1.7.0
 azure-storage-blob==12.3.2
 azure-storage-common==2.1.0
@@ -16,3 +22,6 @@ numpy==1.22.0
 python-dateutil==2.8.1
 
 markupsafe==2.0.1
+```
+4. Have JDK8
+5. (Optional) change logging level to WARNING in `osci-cli.py`

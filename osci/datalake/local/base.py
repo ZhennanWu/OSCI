@@ -34,7 +34,8 @@ class LocalSystemArea(BaseDataLakeArea):
         print(self, base_path, base_area_dir)
 
     def add_fs_prefix(self, path: Union[Path, str]) -> str:
-        return f'{self.FS_PREFIX}:///{path}'
+        return f'{self.FS_PREFIX}:///{Path(path).absolute()}'
+        # return f'{self.FS_PREFIX}:///{path}'
 
     def add_fs_absolute_prefix(self, path):
         return f'{self.FS_PREFIX}:///{Path(path).absolute()}'

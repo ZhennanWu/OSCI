@@ -26,8 +26,9 @@ EMAIL_REGEXP = r'^[a-zA-Z0-9_.+-]+@(?P<domain>[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)$'
 def match_company_by_email(email: str) -> Optional[str]:
     email_match = re.match(EMAIL_REGEXP, email)
     if email_match:
-        return CompanyDomainMatcher().match_company_by_domain(domain=email_match.group('domain'))
-    return
+        res = CompanyDomainMatcher().match_company_by_domain(domain=email_match.group('domain'))
+        return res or "Unknown"
+    return "Unknown"
 
 
 if __name__ == '__main__':

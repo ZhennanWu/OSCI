@@ -57,6 +57,7 @@ from osci.actions.process import (
     OSCILanguagesAction,
     OSCILicensesAction,
     OSCIRankingAction,
+    RepositoryCompositionAction,
 )
 
 

@@ -13,3 +13,4 @@ from .osci_rankers import (
     OSCILicensesAction,
     OSCIRankingAction,
 )
+from .repository_composition import RepositoryCompositionAction

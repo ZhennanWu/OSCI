@@ -47,6 +47,22 @@ class LocalSystemArea(BaseDataLakeArea):
     @property
     def _github_events_commits_base(self) -> Union[str, Path]:
         return self.BASE_PATH / self.BASE_AREA_DIR / 'github' / 'events' / 'push'
+    
+    @property
+    def _github_events_issues_base(self) -> Union[str, Path]:
+        return self.BASE_PATH / self.BASE_AREA_DIR / 'github' / 'events' / 'issues'
+    
+    @property
+    def _github_events_issue_comment_base(self) -> Union[str, Path]:
+        return self.BASE_PATH / self.BASE_AREA_DIR / 'github' / 'events' / 'issue-comment'
+    
+    @property
+    def _github_events_pull_base(self) -> Union[str, Path]:
+        return self.BASE_PATH / self.BASE_AREA_DIR / 'github' / 'events' / 'pull'
+    
+    @property
+    def _github_events_review_base(self) -> Union[str, Path]:
+        return self.BASE_PATH / self.BASE_AREA_DIR / 'github' / 'events' / 'review'
 
     @property
     def _github_raw_events_commits_base(self) -> Union[str, Path]:

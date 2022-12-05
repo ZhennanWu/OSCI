@@ -91,3 +91,115 @@ class LocalLandingArea(BaseLandingArea, LocalSystemArea):
         else:
             log.warning(f'Not such repositories names file for {date:%Y-%m-%d} in path {file_path}')
             return pd.DataFrame()
+
+    def save_issues_events(self, push_event_commits, date: datetime):
+        path = self._github_events_issues_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+        path.mkdir(parents=True, exist_ok=True)
+
+        file_path = path / self.get_push_events_commits_filename(date)
+        df = pd.DataFrame(push_event_commits)
+        df.to_parquet(str(file_path), engine='pyarrow', index=False)
+
+    def save_issue_comment_events(self, push_event_commits, date: datetime):
+        path = self._github_events_issue_comment_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+        path.mkdir(parents=True, exist_ok=True)
+
+        file_path = path / self.get_push_events_commits_filename(date)
+        df = pd.DataFrame(push_event_commits)
+        df.to_parquet(str(file_path), engine='pyarrow', index=False)
+
+    def save_pull_events(self, push_event_commits, date: datetime):
+        path = self._github_events_pull_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+        path.mkdir(parents=True, exist_ok=True)
+
+        file_path = path / self.get_push_events_commits_filename(date)
+        df = pd.DataFrame(push_event_commits)
+        df.to_parquet(str(file_path), engine='pyarrow', index=False)
+
+    def save_review_events(self, push_event_commits, date: datetime):
+        path = self._github_events_review_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+        path.mkdir(parents=True, exist_ok=True)
+
+        file_path = path / self.get_push_events_commits_filename(date)
+        df = pd.DataFrame(push_event_commits)
+        df.to_parquet(str(file_path), engine='pyarrow', index=False)
+
+    def get_daily_issues_events(self, date: datetime):
+        df = pd.DataFrame()
+        for hour in range(24):
+            date = date.replace(hour=hour)
+            path = self._github_events_issues_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+            path.mkdir(parents=True, exist_ok=True)
+
+            file_path = path / self.get_push_events_commits_filename(date)
+            hour_df = None
+            if file_path.is_file():
+                hour_df = pd.read_parquet(path=file_path, engine='pyarrow')
+                log.info(f'Issues events commits {date.strftime("%Y-%m-%d %H:00")} df info {get_pandas_data_frame_info(df)}')
+            else:
+                log.warning(f'Not such issues events commits file for {date} in path {file_path}')
+            if hour_df is not None:
+                df = pd.concat([df, hour_df])
+        return df
+
+    def get_daily_issue_comment_events(self, date: datetime):
+        df = pd.DataFrame()
+        for hour in range(24):
+            date = date.replace(hour=hour)
+            path = self._github_events_issue_comment_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+            path.mkdir(parents=True, exist_ok=True)
+
+            file_path = path / self.get_push_events_commits_filename(date)
+            hour_df = None
+            if file_path.is_file():
+                hour_df = pd.read_parquet(path=file_path, engine='pyarrow')
+                log.info(f'Issue_comment events commits {date.strftime("%Y-%m-%d %H:00")} df info {get_pandas_data_frame_info(df)}')
+            else:
+                log.warning(f'Not such issue_comment events commits file for {date} in path {file_path}')
+            if hour_df is not None:
+                df = pd.concat([df, hour_df])
+        return df
+
+    def get_daily_pull_events(self, date: datetime):
+        df = pd.DataFrame()
+        for hour in range(24):
+            date = date.replace(hour=hour)
+            path = self._github_events_pull_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+            path.mkdir(parents=True, exist_ok=True)
+
+            file_path = path / self.get_push_events_commits_filename(date)
+            hour_df = None
+            if file_path.is_file():
+                hour_df = pd.read_parquet(path=file_path, engine='pyarrow')
+                log.info(f'pull events commits {date.strftime("%Y-%m-%d %H:00")} df info {get_pandas_data_frame_info(df)}')
+            else:
+                log.warning(f'Not such pull events commits file for {date} in path {file_path}')
+            if hour_df is not None:
+                df = pd.concat([df, hour_df])
+        return df
+
+    def get_daily_review_events(self, date: datetime):
+        df = pd.DataFrame()
+        for hour in range(24):
+            date = date.replace(hour=hour)
+            path = self._github_events_review_base / \
+            date.strftime("%Y") / date.strftime("%m") / date.strftime("%d")
+            path.mkdir(parents=True, exist_ok=True)
+
+            file_path = path / self.get_push_events_commits_filename(date)
+            hour_df = None
+            if file_path.is_file():
+                hour_df = pd.read_parquet(path=file_path, engine='pyarrow')
+                log.info(f'review events commits {date.strftime("%Y-%m-%d %H:00")} df info {get_pandas_data_frame_info(df)}')
+            else:
+                log.warning(f'Not such review events commits file for {date} in path {file_path}')
+            if hour_df is not None:
+                df = pd.concat([df, hour_df])
+        return df

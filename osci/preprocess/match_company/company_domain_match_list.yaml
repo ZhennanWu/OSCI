@@ -1844,3 +1844,8 @@
   regex:
     - ^.*\.infosys\.com$
   industry: Technology
+
+# - company: Unknown
+#   domains:
+#   regex:
+#   industry: Technology

@@ -68,6 +68,30 @@ class BaseLandingArea(BaseDataLakeArea, abc.ABC):
 
     def save_push_events_commits(self, push_event_commits, date: datetime):
         raise NotImplementedError()
+    
+    def save_issues_events(self, push_event_commits, date: datetime):
+        raise NotImplementedError()
+    
+    def save_issue_comment_events(self, push_event_commits, date: datetime):
+        raise NotImplementedError()
+    
+    def save_pull_events(self, push_event_commits, date: datetime):
+        raise NotImplementedError()
+    
+    def save_review_events(self, push_event_commits, date: datetime):
+        raise NotImplementedError()
+
+    def get_daily_issues_events(self, date: datetime):
+        raise NotImplementedError()
+    
+    def get_daily_issue_comment_events(self, date: datetime):
+        raise NotImplementedError()
+    
+    def get_daily_pull_events(self, date: datetime):
+        raise NotImplementedError()
+    
+    def get_daily_review_events(self, date: datetime):
+        raise NotImplementedError()
 
     def get_hour_push_events_commits(self, date: datetime):
         raise NotImplementedError()

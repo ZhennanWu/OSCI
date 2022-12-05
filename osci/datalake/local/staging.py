@@ -108,9 +108,10 @@ class LocalStagingArea(BaseStagingArea, LocalSystemArea):
             return yaml.load(stream, Loader=yaml.FullLoader)
 
     def get_repositories_path(self, date: datetime) -> Path:
-        path = self._github_repositories_base / date.strftime("%Y") / date.strftime("%m")
+        # path = self._github_repositories_base / date.strftime("%Y") / date.strftime("%m")
+        path = self._github_repositories_base / "2020" / "01"
         path.mkdir(parents=True, exist_ok=True)
-        return path / self._get_repositories_file_name(date)
+        return path / "repository-2020-01-01.parquet"
 
     def get_repositories(self, date: datetime) -> pd.DataFrame:
         return pd.read_parquet(self.get_repositories_path(date=date), engine='pyarrow')

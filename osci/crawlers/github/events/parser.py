@@ -18,12 +18,19 @@
 from typing import Dict, Type, Iterable, Iterator
 from datetime import datetime
 
+from osci.crawlers.github.events.issue import IssueCommentEvent, IssuesEvent
+from osci.crawlers.github.events.pull import PullEvent, ReviewEvent
+
 from .base import Event
 from .push import PushEvent, PushEventCommit
 from osci.preprocess.match_company import match_company_by_email
 
 EVENT_TYPES: Dict[str, Type[Event]] = {
-    "PushEvent": PushEvent
+    "PushEvent": PushEvent,
+    "IssuesEvent": IssuesEvent,
+    "IssueCommentEvent": IssueCommentEvent,
+    "PullRequestEvent": PullEvent,
+    "PullRequestReviewEvent": ReviewEvent,
 }
 
 

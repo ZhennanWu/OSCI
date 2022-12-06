@@ -39,6 +39,32 @@ class PullEvent(Event):
             closed=pull.get("state") == "closed"
         )
 
+
+class PullEventsSchema(NamedTuple):
+    event_id = "event_id"
+    event_created_at = "event_created_at"
+
+    repo_name = "repo_name"
+    org_name = "org_name"
+    actor_login = "actor_login"
+
+    author_name = "author_name"
+    author_email = "author_email"
+
+    merged = "merged"
+    closed = "closed"
+
+    required = [event_id,
+                event_created_at,
+                repo_name,
+                org_name,
+                actor_login,
+                author_name,
+                author_email,
+                merged,
+                closed]
+
+
 class ReviewEventEntry(NamedTuple):
     event_id: int
     event_created_at: datetime
